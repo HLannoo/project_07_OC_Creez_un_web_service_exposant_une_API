@@ -1,36 +1,65 @@
 <?php
 
 namespace App\Entity;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Serializer\Filter\GroupFilter;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource(
+    formats: ['json'],
+    collectionOperations: [
+        'get' => ['normalization_context' => ['groups' => 'read:collection_user']],
+        'post'=> ['denormalization_context' => ['groups' => 'write:item_user']]
+    ],
+    itemOperations: ['get'=>['normalization_context' => ['groups' => 'read:item_user']],'delete']
+)]
+#[ApiFilter(SearchFilter::class, properties: ['id' => 'exact', 'lastName' => 'partial'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups(['read:collection_user'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
+    #[Groups(['read:item_user','write:item_user'])]
+    #[Assert\Email(
+        message: "l'email {{ value }} n'est pas un email valide.",
+    )]
     private $email;
 
     #[ORM\Column(type: 'json')]
+    #[Groups(['read:item_user','write:item_user'])]
+    #[Assert\NotBlank(message:"le champ roles n'a pas été renseigné" ,)]
     private $roles = [];
 
     #[ORM\Column(type: 'string')]
+    #[Groups(['read:item_user','write:item_user'])]
+    #[Assert\NotBlank(message:"le champ password n'a pas été renseigné" ,)]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection_user','read:item_user','write:item_user'])]
+    #[Assert\NotBlank(message:"le champ firstName n'a pas été renseigné" ,)]
     private $firstName;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:collection_user','read:item_user','write:item_user'])]
+    #[Assert\NotBlank(message:"le champ lastName n'a pas été renseigné" ,)]
     private $lastName;
 
     #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'user')]
+    #[Groups(['write:item_user'])]
+    #[Assert\NotBlank(message:"le champ customer n'a pas été renseigné" ,)]
     private $customer;
 
     public function getId(): ?int
