@@ -99,7 +99,7 @@ class AppFixtures extends Fixture
                 $user = new User();
                 $hashedPassword = $this->passwordHasher->hashPassword(
                     $user,
-                    $faker->password
+                    "password"
                 );
                 $user->setFirstName($faker->firstName)
                     ->setLastName($faker->lastName)
