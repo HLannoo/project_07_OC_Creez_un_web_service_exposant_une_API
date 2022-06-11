@@ -11,6 +11,8 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
@@ -22,6 +24,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
     itemOperations: ['get'=>['normalization_context' => ['groups' => 'read:item_user']],'delete']
 )]
 #[ApiFilter(SearchFilter::class, properties: ['id' => 'exact', 'lastName' => 'partial'])]
+#[UniqueEntity(
+    fields: ['email'],
+    message: "l'email est déja utilisé",
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -58,7 +64,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $lastName;
 
     #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'user')]
-    #[Groups(['write:item_user'])]
     #[Assert\NotBlank(message:"le champ customer n'a pas été renseigné" ,)]
     private $customer;
 
@@ -156,6 +161,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @see UserInterface
+     */
     public function getCustomer(): ?Customer
     {
         return $this->customer;
@@ -171,4 +179,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUsername(): string {
         return $this->email;
     }
+
 }
