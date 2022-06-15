@@ -31,7 +31,7 @@ class   CurrentUserExtension implements QueryCollectionExtensionInterface, Query
 
     public function addWhere(string $resourceClass, QueryBuilder $queryBuilder)
     {
-        if ($resourceClass === User::class) {
+        if ($resourceClass === User::class && ($this->security->getUser()->getRoles()[0] == "ROLE_ADMIN" || $this->security->getUser()->getRoles()[0] == "ROLE_USER") ) {
             $alias = $queryBuilder->getRootAliases()[0];
             $queryBuilder
                 ->andWhere("$alias.customer = :current_user")

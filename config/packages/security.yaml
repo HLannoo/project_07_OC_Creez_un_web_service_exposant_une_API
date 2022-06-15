@@ -45,7 +45,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
-        - { path: ^/api/users,       roles: ROLE_ADMIN , methods: [POST, DELETE] }
+        - { path: ^/api/users,       roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] , methods: [POST, DELETE] }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
 when@test:
     security:
