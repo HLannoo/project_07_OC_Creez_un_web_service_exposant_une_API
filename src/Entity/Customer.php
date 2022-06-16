@@ -3,10 +3,9 @@
 namespace App\Entity;
 
 
-use ApiPlatform\Core\Annotation\ApiFilter;
+
+use ApiPlatform\Core\Action\NotFoundAction;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\CustomerRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,7 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
 #[ApiResource(
     formats: ['json'],
-    collectionOperations:[],itemOperations: ['get']
+    collectionOperations: [],
+    itemOperations: ['get']
 )]
 class Customer
 {

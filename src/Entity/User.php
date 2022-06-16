@@ -21,9 +21,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
         'get' => ['normalization_context' => ['groups' => 'read:collection_user']],
         'post'=> ['denormalization_context' => ['groups' => 'write:item_user']]
     ],
-    itemOperations: ['get'=>['normalization_context' => ['groups' => 'read:item_user']],'delete']
+    itemOperations: ['get'=>['normalization_context' => ['groups' => 'read:item_user']],
+        'delete',
+    ]
 )]
-#[ApiFilter(SearchFilter::class, properties: ['id' => 'exact', 'lastName' => 'partial'])]
 #[UniqueEntity(
     fields: ['email'],
     message: "l'email est déja utilisé",
@@ -64,7 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $lastName;
 
     #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'user')]
-    #[Assert\NotBlank(message:"le champ customer n'a pas été renseigné" ,)]
+    #[Groups(['read:item_user'])]
     private $customer;
 
     public function getId(): ?int
