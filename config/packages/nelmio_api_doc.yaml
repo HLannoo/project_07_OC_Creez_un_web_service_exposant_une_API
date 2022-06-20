@@ -8,13 +8,13 @@ nelmio_api_doc:
                     tags:
                         - Token
                     operationId: postCredentialsItem
-                    summary: Permet d'obtenir le token JWT pour se logger.
+                    summary: Retrieves your JWT when your login and paste it in the Authorize field.
                     requestBody:
-                        description: Crée un nouveau token JWT
+                        description: Create a new JWT
                         content:
                             application/json:
                                 schema:
-                                    $ref: '#/components/schemas/Credentials'
+                                    $ref: '#/components/schemas/Authorize'
                     responses:
                         '200':
                             description: Récupère le token JWT
@@ -30,7 +30,7 @@ nelmio_api_doc:
                         token:
                             type: string
                             readOnly: true
-                Credentials:
+                Authorize:
                     type: object
                     properties:
                         username:
@@ -51,5 +51,5 @@ nelmio_api_doc:
     areas: # to filter documented areas
         path_patterns:
             - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
-        host_patterns: # document only routes with a host of the form api.*
-            - ^api\.
+        disable_default_routes: true
+
