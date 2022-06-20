@@ -1,4 +1,7 @@
 ## Code quality & Maintainability
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9c7480e7794a451682b85a8205b065d6)](https://app.codacy.com/gh/Kakahuette400/project_07?utm_source=github.com&utm_medium=referral&utm_content=Kakahuette400/project_07&utm_campaign=Badge_Grade_Settings)
+
 Code quality has been validated by Symfony Insight. You can access the inspection report by clicking on the badge below.
 
 
