@@ -27,12 +27,12 @@ class Phone
     #[Groups(['read:collection_phone','read:item_phone'])]
     private $name;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:item_phone'])]
+    #[ORM\Column(type: 'string', length: 2048)]
+    #[Groups(['read:collection_phone','read:item_phone'])]
     private $description;
 
     #[ORM\Column(type: 'float')]
-    #[Groups(['read:item_phone'])]
+    #[Groups(['read:collection_phone','read:item_phone'])]
     private $price;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -40,8 +40,32 @@ class Phone
     private $image;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:item_phone'])]
+    #[Groups(['read:collection_phone','read:item_phone'])]
     private $brand;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:item_phone'])]
+    private $color;
+
+    #[ORM\Column(type: 'integer')]
+    #[Groups(['read:item_phone'])]
+    private $storage;
+
+    #[ORM\Column(type: 'float')]
+    #[Groups(['read:item_phone'])]
+    private $size;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:item_phone'])]
+    private $system;
+
+    #[ORM\Column(type: 'float')]
+    #[Groups(['read:item_phone'])]
+    private $weight;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Groups(['read:item_phone'])]
+    private $card;
 
     public function getId(): ?int
     {
@@ -104,6 +128,78 @@ class Phone
     public function setBrand(string $brand): self
     {
         $this->brand = $brand;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    public function getStorage(): ?int
+    {
+        return $this->storage;
+    }
+
+    public function setStorage(int $storage): self
+    {
+        $this->storage = $storage;
+
+        return $this;
+    }
+
+    public function getSize(): ?float
+    {
+        return $this->size;
+    }
+
+    public function setSize(float $size): self
+    {
+        $this->size = $size;
+
+        return $this;
+    }
+
+    public function getSystem(): ?string
+    {
+        return $this->system;
+    }
+
+    public function setSystem(string $system): self
+    {
+        $this->system = $system;
+
+        return $this;
+    }
+
+    public function getWeight(): ?float
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(float $weight): self
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    public function getCard(): ?string
+    {
+        return $this->card;
+    }
+
+    public function setCard(string $card): self
+    {
+        $this->card = $card;
 
         return $this;
     }

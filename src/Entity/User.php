@@ -2,13 +2,11 @@
 
 namespace App\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
-use ApiPlatform\Core\Serializer\Filter\GroupFilter;
 use Symfony\Component\Serializer\Annotation\Groups;
-use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
-use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use OpenApi\Attributes as OA;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -21,9 +19,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
         'get' => ['normalization_context' => ['groups' => 'read:collection_user']],
         'post'=> ['denormalization_context' => ['groups' => 'write:item_user']]
     ],
-    itemOperations: ['get'=>['normalization_context' => ['groups' => 'read:item_user']],'delete']
+    itemOperations: ['get'=>['normalization_context' => ['groups' => 'read:item_user']],
+        'delete',
+    ]
 )]
-#[ApiFilter(SearchFilter::class, properties: ['id' => 'exact', 'lastName' => 'partial'])]
 #[UniqueEntity(
     fields: ['email'],
     message: "l'email est déja utilisé",
@@ -64,7 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $lastName;
 
     #[ORM\ManyToOne(targetEntity: Customer::class, inversedBy: 'user')]
-    #[Assert\NotBlank(message:"le champ customer n'a pas été renseigné" ,)]
+    #[Groups(['read:item_user'])]
     private $customer;
 
     public function getId(): ?int
