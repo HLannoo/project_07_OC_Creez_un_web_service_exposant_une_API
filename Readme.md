@@ -1,9 +1,11 @@
 ## Code quality & Maintainability
-Code quality has been validated by Symfony Insight. You can access the inspection report by clicking on the badge below.
+Code quality has been validated by Codacy. You can access the inspection report by clicking on the badge below.
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/cbae18f267754daebf3f44fde38d71c9)](https://www.codacy.com/gh/Kakahuette400/project_07/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Kakahuette400/project_07&amp;utm_campaign=Badge_Grade)
 
 Maintanibility has been validated by CodeClimate. You can access the inspection report by clicking on the badge below.
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/41c949735602a5a2f964/maintainability)](https://codeclimate.com/github/Kakahuette400/project_07/maintainability)
 
 ## Installation
 - PHP 8.0.13
