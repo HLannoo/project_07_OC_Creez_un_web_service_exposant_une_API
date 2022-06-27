@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Security;
 
-class CustomerUserLink implements EventSubscriberInterface{
+class SettingsUserLink implements EventSubscriberInterface{
 
     private $security;
 
@@ -30,6 +30,7 @@ class CustomerUserLink implements EventSubscriberInterface{
 
         if($user instanceof User && $method === "POST"){
             $user->setCustomer($this->security->getUser()->getCustomer());
+            $user->setRoles(['ROLE_USER']);
         }
     }
 }

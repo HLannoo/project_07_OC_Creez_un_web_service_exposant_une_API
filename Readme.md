@@ -53,6 +53,9 @@ Step 5: Run the application :
   
     php -S localhost:8000 -t public   
 
+
+For read documentation and test the API go here : http://localhost:8000/api/doc
+
 ## Principle libraries used:
 The libraries were installed via composer, please install it:
 - For the API: **api-platform/core** https://packagist.org/packages/api-platform/core
