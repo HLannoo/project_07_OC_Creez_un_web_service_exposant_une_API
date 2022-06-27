@@ -10,8 +10,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: PhoneRepository::class)]
 #[ApiResource(
     formats: ['json'],
-    collectionOperations: ['get' => ['normalization_context' => ['groups' => 'read:collection_phone']]],
-    itemOperations: ['get' => ['normalization_context' => ['groups' => 'read:item_phone']]],
+    collectionOperations: ['get' => ['normalization_context' => ['groups' => 'read_collection_phone']]],
+    itemOperations: ['get' => ['normalization_context' => ['groups' => 'read_item_phone']]],
     order: ["price" => "DESC"],
 
 )]
@@ -20,51 +20,51 @@ class Phone
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read:collection_phone'])]
+    #[Groups(['read_collection_phone'])]
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection_phone','read:item_phone'])]
+    #[Groups(['read_collection_phone','read_item_phone'])]
     private $name;
 
     #[ORM\Column(type: 'string', length: 2048)]
-    #[Groups(['read:collection_phone','read:item_phone'])]
+    #[Groups(['read_collection_phone','read_item_phone'])]
     private $description;
 
     #[ORM\Column(type: 'float')]
-    #[Groups(['read:collection_phone','read:item_phone'])]
+    #[Groups(['read_collection_phone','read_item_phone'])]
     private $price;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    #[Groups(['read:item_phone'])]
+    #[Groups(['read_item_phone'])]
     private $image;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:collection_phone','read:item_phone'])]
+    #[Groups(['read_collection_phone','read_item_phone'])]
     private $brand;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:item_phone'])]
+    #[Groups(['read_item_phone'])]
     private $color;
 
     #[ORM\Column(type: 'integer')]
-    #[Groups(['read:item_phone'])]
+    #[Groups(['read_item_phone'])]
     private $storage;
 
     #[ORM\Column(type: 'float')]
-    #[Groups(['read:item_phone'])]
+    #[Groups(['read_item_phone'])]
     private $size;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:item_phone'])]
+    #[Groups(['read_item_phone'])]
     private $system;
 
     #[ORM\Column(type: 'float')]
-    #[Groups(['read:item_phone'])]
+    #[Groups(['read_item_phone'])]
     private $weight;
 
     #[ORM\Column(type: 'string', length: 255)]
-    #[Groups(['read:item_phone'])]
+    #[Groups(['read_item_phone'])]
     private $card;
 
     public function getId(): ?int

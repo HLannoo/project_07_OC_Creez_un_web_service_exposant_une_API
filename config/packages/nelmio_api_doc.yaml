@@ -17,7 +17,7 @@ nelmio_api_doc:
                                     $ref: '#/components/schemas/Authorize'
                     responses:
                         '200':
-                            description: Récupère le token JWT
+                            description: Return JWT
                             content:
                                 application/json:
                                     schema:
@@ -52,4 +52,7 @@ nelmio_api_doc:
         path_patterns:
             - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
         disable_default_routes: true
+
+
+
 
