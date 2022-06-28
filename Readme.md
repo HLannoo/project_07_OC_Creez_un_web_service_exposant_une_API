@@ -26,6 +26,7 @@ To use JWT you need OpenSSl avaiable here : https://slproweb.com/products/Win32O
 Step 1: Clone the Repository on server from the root via the command: **git clone https://github.com/Kakahuette400/project_07.git**
 
 Step 2: Install composer on your project if it's not already the case: https://getcomposer.org/
+- Modify your "DATABASE_URL=" in .env file
 - Install all dependances avaible on : https://packagist.org/ whit "composer install"
 - Read the documentation to customize your installation
 
