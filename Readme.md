@@ -40,6 +40,7 @@ Step 3: To create a database follow this instructions :
 
 
 Step 4: Create SSH Keys ->  Add your passphrase "JWT_PASSPHRASE=" into .env.local or env
+/!\ Warning : You need to add path environnement for use openSSL /!\
 
 `Place this command in your terminal`
   
